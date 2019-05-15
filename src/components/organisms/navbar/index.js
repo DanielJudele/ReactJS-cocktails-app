@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Alcoholic from '../../pages/alcoholic/index';
 import Ordinarydrink from '../../pages/ordinarydrink';
-import NonAlcoholic from '../../pages/nonAlcoholic';
+import NonAlcoholic from '../../pages/nonAlcoholic/index';
 import style from './style.css'
 import Cocktailglass from '../../pages/cocktailglass';
 import Champagneflute from '../../pages/champagneflute';
