@@ -84,7 +84,7 @@ class Alcoholic extends Component {
               </div>
             </div>
           ))}
-          {this.state.showDetails & this.state.selectedItem ? (
+          {/* {this.state.showDetails & this.state.selectedItem ? (
           categoriesDetails
         ) : (
           <ItemIconDetails
@@ -92,7 +92,7 @@ class Alcoholic extends Component {
             itemTitle={this.state.selectedItem.strDrink}
             action={this.backToCategories}
           />
-        )}
+        )} */}
         </div>
       );
     }
