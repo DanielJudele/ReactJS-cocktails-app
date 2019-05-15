@@ -1,0 +1,12 @@
+
+.header {
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: black;    
+    height: 65px;
+    line-height: 50px;
+    vertical-align: middle;
+    margin: 0px;
+  }
