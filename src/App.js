@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/organisms/header';
-import NavBar from './components/molecules/navbar';
+import NavBar from './components/organisms/navbar';
 
 function App() {
   return (
