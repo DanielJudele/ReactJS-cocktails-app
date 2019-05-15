@@ -1,0 +1,20 @@
+.container {
+      display:flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+      align-items: stretch;
+      background-color: white;
+    
+  }
+.box {
+    background-color: lightgray;
+    width: 200px;
+    height: 180px;
+    margin: 10px;
+    float: left;
+  }
+.box img{
+  padding-top:10px;
+}
