@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import style from './style.css'
 import { withRouter } from 'react-router-dom';
-import details from '../../organisms/details/index';
+import details from '../cocktaildetails/index';
 
 class Champagneflute extends Component {
   constructor(props) {

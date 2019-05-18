@@ -5,10 +5,12 @@ import Ordinarydrink from '../../pages/ordinarydrink/index';
 import NonAlcoholic from '../../pages/nonAlcoholic/index';
 import Cocktailglass from '../../pages/cocktailglass/index';
 import Champagneflute from '../../pages/champagneflute/index';
+import CocktailDetails from '../../pages/cocktaildetails/index';
 import style from './style.css'
+import AddCocktail from '../../pages/addcocktail';
 
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
         <Router>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">                
@@ -20,11 +22,14 @@ const NavBar = () => {
             </nav>
             <hr />
             <Switch>
+                  
                 <Route exact path='/' component={Alcoholic} />
-                <Route path='/nonAlcoholic' component={NonAlcoholic} />
+                <Route exact path='/nonAlcoholic' component={NonAlcoholic} />
                 <Route path='/ordinarydrink' component={Ordinarydrink} />
                 <Route path='/cocktailglass' component={Cocktailglass} />
                 <Route path='/champagneflute' component={Champagneflute} />
+                <Route path="/details" component={CocktailDetails}/>
+                <Route path="/addcocktail" component={AddCocktail}/>
             </Switch>
         </Router>)
 }

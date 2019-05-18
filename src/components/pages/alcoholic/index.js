@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from "axios";
 import style from './style.css'
 import { withRouter } from 'react-router-dom';
-import details from '../../organisms/details/index';
 
 class Alcoholic extends Component {
   constructor(props) {
@@ -10,9 +9,7 @@ class Alcoholic extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      showDetails: false,
-      items: [],
-      selectedItem: {}
+      items: []
     };
   }
 
@@ -31,31 +28,17 @@ class Alcoholic extends Component {
       });
   }
 
-  onShowDetails(item) {
-    let { history } = this.props;
-  history.push({
-   pathname: '/somepage',
-   search: 'name=jhon&amp;age=24'
-  });
-    // console.log(this.state.showCategories);
-    // this.setState(
-    //   {
-    //     showCategories: false,
-    //     showDetails: true,
-    //     showTitleDetails: false,
-    //     selectedItem: item
-    //   },
-    //   () => {
-    //     this.forceUpdate();
-    //   }
-    // );
+  handleClick(e, item) {
+    e.preventDefault();
+    this.props.history.push({ pathname: '/details', state: { cocktail: item } });
   }
 
-  onShowTitleDetails(item) {
-    this.setState({ showDetails: true, selectedItem: item });
+  handleAddClick(e) {
+    e.preventDefault();
+    this.props.history.push({ pathname: '/addcocktail' });
   }
+
   componentDidUpdate() {
-    this.render();
   }
 
   componentWillUnmount() { }
@@ -69,34 +52,26 @@ class Alcoholic extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="container">
-          {items.map(item => (
-            <div className="box" key={item.idDrink}>
-              <div>
-                <a onClick={this.onShowDetails.bind(this, item)} href="#">
-                  <img src={item.strDrinkThumb} style={{ width: "130px" }} />
-                </a>
+        <div>
+          <div className="boxAdd">
+            <button onClick={e => this.handleAddClick(e)}>Add</button>
+          </div>
+          <div className="container">
+            {items.map(item => (
+              <div className="box" key={item.idDrink}>
+                <div>
+                  <a onClick={e => this.handleClick(e, item)} href="#">
+                    <img src={item.strDrinkThumb} style={{ width: "130px", height: "130px" }} />
+                  </a>
+                  <p >{item.strDrink} </p>
+                </div>
               </div>
-              <div>
-                <a onClick={this.onShowTitleDetails.bind(this, item)} href="#">
-                  {item.strDrink}
-                </a>
-              </div>
-            </div>
-          ))}
-          {/* {this.state.showDetails & this.state.selectedItem ? (
-          categoriesDetails
-        ) : (
-          <ItemIconDetails
-            itemUrl={this.state.selectedItem.strDrinkThumb}
-            itemTitle={this.state.selectedItem.strDrink}
-            action={this.backToCategories}
-          />
-        )} */}
+            ))}
+          </div>
         </div>
       );
     }
   }
 }
 
-export default Alcoholic;
+export default withRouter(Alcoholic);

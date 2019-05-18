@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import style from './style.css'
 import { withRouter } from 'react-router-dom';
-import details from '../../organisms/details/index';
+import CocktailDetails from '../cocktaildetails/index';
 
 class NonAlcoholic extends Component {
   constructor(props) {

@@ -1,0 +1,19 @@
+.cocktaildetails {
+    background-color: transparent;
+    width: 400px;
+    height:400px;
+    margin: 10px auto;
+    text-align: center;
+  }
+.cocktaildetails img{
+  display: block;
+  margin: 10px auto;
+}
+.cocktaildetails h3{
+  margin: 5px  left;
+  display: block;
+}
+.cocktaildetails button{
+  display: block;
+  margin: 5px left;
+}
