@@ -82,7 +82,7 @@ class AddCocktail extends React.Component {
                   type="submit"
                   className="submitButton"
                   disabled={formProps.isSubmitting}>
-                  Submit Form
+                  Create cocktail
                </button>
               </div>
             </Form >
