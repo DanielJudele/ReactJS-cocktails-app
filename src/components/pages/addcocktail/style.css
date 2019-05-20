@@ -1,6 +1,24 @@
 .addcocktail{
   background-color: transparent;
-} 
+}
+form{
+  display: block;
+  margin-bottom: 0px;
+  width:30vm;
+  
+}
+form input, textarea{
+  margin:5px auto;
+  display: inline-block;
+  min-width: 400px;
+  font-family: inherit;
+}
+
+.submitButton{
+  width: fit-content;
+  margin: 0px auto;
+}
+
 .addcocktailimage {
     width:30vm;
     display: inline-grid;
