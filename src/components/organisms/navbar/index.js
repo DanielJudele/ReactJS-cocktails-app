@@ -19,8 +19,7 @@ const NavBar = (props) => {
                     <Link to={'/ordinarydrink'} className="nav-link">Ordinary drink</Link>
                     <Link to={'/cocktailglass'} className="nav-link">Cocktail glass</Link>
                     <Link to={'/champagneflute'} className="nav-link">Champagne flute</Link>                
-            </nav>
-            <hr />
+            </nav>            
             <Switch>
                   
                 <Route exact path='/' component={Alcoholic} />

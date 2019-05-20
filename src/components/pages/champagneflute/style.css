@@ -1,20 +1,33 @@
 .container {
-      display:flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-content: flex-start;
-      align-items: stretch;
-      background-color: white;
-    
-  }
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: stretch;
+  background-color: lightyellow !important;
+  margin-top: 10px;
+}
 .box {
-    background-color: lightyellow;
-    width: 200px;
-    height: 180px;
-    margin: 10px;
-    float: left;
-  }
+width: 200px;
+height: 150px;
+margin: 0px;
+float: left;
+text-align: center;
+padding-top: 0px !important;
+}
 .box img{
-  padding-top:10px;
+display: block;
+margin: 0 auto;
+border: 5px solid lightpink;
+padding-top: 0px !important;
+}
+.box p{
+display: block;
+margin: 0 auto;
+}
+
+.boxAdd{
+margin-left: 10px;
+float: left;
 }

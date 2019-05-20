@@ -5,77 +5,73 @@ import { withRouter } from 'react-router-dom';
 import details from '../cocktaildetails/index';
 
 class Ordinarydrink extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      showDetails: false,
-      items: [],
-      selectedItem: {}
-    };
-  }
+ constructor(props) {
+  super(props);
+  this.state = {
+    error: null,
+    isLoaded: false,
+    items: []
+  };
+}
+componentDidMount() {
+  var linkUrl = "https://thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink";
 
-  componentDidMount() {
-    var linkUrl = "https://thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink";
-
-    axios
-      .get(linkUrl)
-      .then(response => {
-        let results = response.data.drinks;
-        this.setState({ items: results, isLoaded: true });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ error: err, isLoaded: true });
-      });
-  }
-
-  onShowDetails(item) {
-    let { history } = this.props;
-    history.push({
-      pathname: '/somepage',
-      search: 'name=jhon&amp;age=24'
+  axios
+    .get(linkUrl)
+    .then(response => {
+      let results = response.data.drinks;
+      this.setState({ items: results, isLoaded: true });
+    })
+    .catch(err => {
+      console.log(err);
+      this.setState({ error: err, isLoaded: true });
     });
-  }
+}
 
-  onShowTitleDetails(item) {
-    this.setState({ showDetails: true, selectedItem: item });
-  }
-  componentDidUpdate() {
-    this.render();
-  }
+handleClick(e, item) {
+  e.preventDefault();
+  this.props.history.push({ pathname: '/details', state: { cocktail: item } });
+}
 
-  componentWillUnmount() { }
+handleAddClick(e) {
+  e.preventDefault();
+  this.props.history.push({ pathname: '/addcocktail' });
+}
 
-  render() {
-    const { error, isLoaded, items } = this.state;
-    console.log({ error, isLoaded, items });
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
+componentDidUpdate() {
+}
+
+componentWillUnmount() { }
+
+render() {
+  const { error, isLoaded, items } = this.state;
+  console.log({ error, isLoaded, items });
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <div>
+        <div className="boxAdd">
+          <button onClick={e => this.handleAddClick(e)}>Add</button>
+        </div>
         <div className="container">
           {items.map(item => (
             <div className="box" key={item.idDrink}>
               <div>
-                <a onClick={this.onShowDetails.bind(this, item)} href="#">
-                  <img src={item.strDrinkThumb} style={{ width: "130px" }} />
+                <a onClick={e => this.handleClick(e, item)} href="#">
+                  <img src={item.strDrinkThumb} style={{ width: "130px", height: "130px" }} />
                 </a>
-              </div>
-              <div>
-                <a onClick={this.onShowTitleDetails.bind(this, item)} href="#">
-                  {item.strDrink}
-                </a>
+                <p >{item.strDrink} </p>
               </div>
             </div>
           ))}
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
+}
 
-export default Ordinarydrink;
+export default withRouter(Ordinarydrink);

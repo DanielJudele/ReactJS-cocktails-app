@@ -10,12 +10,9 @@ class NonAlcoholic extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      showDetails: false,
-      items: [],
-      selectedItem: {}
+      items: []
     };
   }
-
   componentDidMount() {
     var linkUrl = "https://thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic";
 
@@ -31,19 +28,17 @@ class NonAlcoholic extends Component {
       });
   }
 
-  onShowDetails(item) {
-    let { history } = this.props;
-    history.push({
-      pathname: '/somepage',
-      search: 'name=jhon&amp;age=24'
-    });
+  handleClick(e, item) {
+    e.preventDefault();
+    this.props.history.push({ pathname: '/details', state: { cocktail: item } });
   }
 
-  onShowTitleDetails(item) {
-    this.setState({ showDetails: true, selectedItem: item });
+  handleAddClick(e) {
+    e.preventDefault();
+    this.props.history.push({ pathname: '/addcocktail' });
   }
+
   componentDidUpdate() {
-    this.render();
   }
 
   componentWillUnmount() { }
@@ -57,25 +52,26 @@ class NonAlcoholic extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div className="container">
-          {items.map(item => (
-            <div className="box" key={item.idDrink}>
-              <div>
-                <a onClick={this.onShowDetails.bind(this, item)} href="#">
-                  <img src={item.strDrinkThumb} style={{ width: "130px" }} />
-                </a>
+        <div>
+          <div className="boxAdd">
+            <button onClick={e => this.handleAddClick(e)}>Add</button>
+          </div>
+          <div className="container">
+            {items.map(item => (
+              <div className="box" key={item.idDrink}>
+                <div>
+                  <a onClick={e => this.handleClick(e, item)} href="#">
+                    <img src={item.strDrinkThumb} style={{ width: "130px", height: "130px" }} />
+                  </a>
+                  <p >{item.strDrink} </p>
+                </div>
               </div>
-              <div>
-                <a onClick={this.onShowTitleDetails.bind(this, item)} href="#">
-                  {item.strDrink}
-                </a>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       );
     }
   }
 }
 
-export default NonAlcoholic;
+export default withRouter(NonAlcoholic);
