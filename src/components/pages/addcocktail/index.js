@@ -11,12 +11,31 @@ const addCocktailSchema = Yup.object().shape({
 })
 
 class AddCocktail extends React.Component {
+  constructor(props){
+    super(props)
+     this.state = {
+        imageSrc: ''
+     }
+  }
+  
+  handleFileRead=(e)=>{
+    
+  }
+  handleOnChangeImage = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let fileReader= new FileReader();    
+      fileReader.onloadend = ()=>{        
+        this.setState({imageSrc: fileReader.result})
+      };
+
+      fileReader.readAsDataURL(e.target.files[0]);
+    }
+  }
   handleSubmit = (values, {
     props = this.props,
     setSubmitting
   }) => {
 
-    console.log(values);
     alert('Form Submitted');
     setSubmitting(false);
     return;
@@ -31,13 +50,15 @@ class AddCocktail extends React.Component {
           ingredients: '',
           quantity: ''
         }}
-        validationSchema= {addCocktailSchema}
+        validationSchema={addCocktailSchema}
         onSubmit={this.handleSubmit}
         render={formProps => {
           return (
             <Form>
+
               <div className="addcocktailimage">
-                <input type="file" name="pic" accept="image/*"></input>
+                {this.state.imageSrc ? <img id="fileContent" src={this.state.imageSrc} alt="preview image" style={{ maxWidth: '200px', maxHeight:'200px' }} />: null }
+                <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleOnChangeImage(e)}></input>
               </div>
               <div className="addcocktaildetails">
                 <label htmlFor="name" style={{ display: 'inline-flex' }}>
@@ -46,11 +67,11 @@ class AddCocktail extends React.Component {
                 <Field
                   type="text"
                   id="name"
-                  placeholder="Write the name of the cocktail"
+                  placeholder="Fill in the name"
                   value={formProps.values.name}
                 />
                 {formProps.errors.name && formProps.touched.name ? (
-                  <div>{formProps.errors.name}</div>
+                  <div class="errorMessage">{formProps.errors.name}</div>
                 ) : null}
                 <label htmlFor="ingredients" style={{ display: 'inline-flex' }}>
                   Ingredients
@@ -59,10 +80,10 @@ class AddCocktail extends React.Component {
                   type="text"
                   component="textarea"
                   id="ingredients"
-                  placeholder="Write the ingredients of the cocktail"
+                  placeholder="Fill in the ingredients"
                   value={formProps.values.ingredients}
                 /> {formProps.errors.ingredients && formProps.touched.ingredients ? (
-                  <div>{formProps.errors.ingredients}</div>
+                  <div class="errorMessage">{formProps.errors.ingredients}</div>
                 ) : null}
 
                 <label htmlFor="quantity" style={{ display: 'inline-flex' }}>
@@ -72,11 +93,11 @@ class AddCocktail extends React.Component {
                   type="text"
                   component="textarea"
                   id="quantity"
-                  placeholder="Write more information about quantity"
+                  placeholder="Fill in the quantity"
                   value={formProps.values.quantity}
                 />
                 {formProps.errors.quantity && formProps.touched.quantity ? (
-                  <div>{formProps.errors.quantity}</div>
+                  <div class="errorMessage">{formProps.errors.quantity}</div>
                 ) : null}
                 <button
                   type="submit"

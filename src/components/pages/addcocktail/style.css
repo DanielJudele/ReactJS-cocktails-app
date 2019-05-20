@@ -43,3 +43,7 @@ form input, textarea{
   width: fit-content;
   margin: 0px auto;
 }
+.errorMessage{
+  color: red;
+  display: inline-flex;
+}
