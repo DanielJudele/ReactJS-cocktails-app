@@ -11,21 +11,25 @@ const addCocktailSchema = Yup.object().shape({
 })
 
 class AddCocktail extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-     this.state = {
-        imageSrc: ''
-     }
+    this.state = {
+      imageSrc: '',
+      showDetails: false,
+      name: '',
+      ingredients: '',
+      quantity: ''
+    }
   }
-  
-  handleFileRead=(e)=>{
-    
+
+  handleFileRead = (e) => {
+
   }
   handleOnChangeImage = (e) => {
     if (e.target.files && e.target.files[0]) {
-      let fileReader= new FileReader();    
-      fileReader.onloadend = ()=>{        
-        this.setState({imageSrc: fileReader.result})
+      let fileReader = new FileReader();
+      fileReader.onloadend = () => {
+        this.setState({ imageSrc: fileReader.result })
       };
 
       fileReader.readAsDataURL(e.target.files[0]);
@@ -35,76 +39,88 @@ class AddCocktail extends React.Component {
     props = this.props,
     setSubmitting
   }) => {
-
-    alert('Form Submitted');
     setSubmitting(false);
+    this.setState({ showDetails: true, name: values.name, ingredients: values.ingredients, quantity: values.quantity });
     return;
   }
 
   render() {
+    if (this.state.showDetails === true) {
+      return (<div className="row">
+        <div>
+          {this.state.imageSrc ? <img id="fileContent" src={this.state.imageSrc} alt="image" style={{ maxWidth: '300px', maxHeight: '300px' }} /> : null}
+          <label style={{ display: "block" }}> Cocktail name: {this.state.name}</label>
+          <label style={{ display: "block" }}> Ingredients: {this.state.ingredients}</label>
+          <label style={{ display: "block" }}> Quantity: {this.state.quantity}</label>
+          <button onClick={() => this.props.history.goBack()} className="button">Hide details</button>
+        </div>
+      </div>)
+    }
 
     return (
       <Formik
-        initialValues={{
-          name: '',
-          ingredients: '',
-          quantity: ''
-        }}
+        initialValues={{ name: '', ingredients: '', quantity: '' }}
         validationSchema={addCocktailSchema}
         onSubmit={this.handleSubmit}
         render={formProps => {
           return (
             <Form>
-
-              <div className="addcocktailimage">
-                {this.state.imageSrc ? <img id="fileContent" src={this.state.imageSrc} alt="preview image" style={{ maxWidth: '200px', maxHeight:'200px' }} />: null }
-                <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleOnChangeImage(e)}></input>
-              </div>
-              <div className="addcocktaildetails">
-                <label htmlFor="name" style={{ display: 'inline-flex' }}>
-                  Cocktail name
+              <div className="row">
+                <div className="column">
+                  <div className="previewImage">
+                    {this.state.imageSrc ? <img id="fileContent" src={this.state.imageSrc} alt="preview image" style={{ width: '100%', height: '100%' }} /> : <div>No image uploaded</div>}
+                  </div><input type="file" name="pic" accept="image/*" onChange={(e) => this.handleOnChangeImage(e)}></input>
+                </div>
+                <div className="column">
+                  <label htmlFor="name" >
+                    Cocktail name
                  </label>
-                <Field
-                  type="text"
-                  id="name"
-                  placeholder="Fill in the name"
-                  value={formProps.values.name}
-                />
-                {formProps.errors.name && formProps.touched.name ? (
-                  <div class="errorMessage">{formProps.errors.name}</div>
-                ) : null}
-                <label htmlFor="ingredients" style={{ display: 'inline-flex' }}>
-                  Ingredients
-                </label>
-                <Field
-                  type="text"
-                  component="textarea"
-                  id="ingredients"
-                  placeholder="Fill in the ingredients"
-                  value={formProps.values.ingredients}
-                /> {formProps.errors.ingredients && formProps.touched.ingredients ? (
-                  <div class="errorMessage">{formProps.errors.ingredients}</div>
-                ) : null}
+                  <Field
+                    type="text"
+                    id="name"
+                    placeholder="Fill in the name"
+                    value={formProps.values.name}
+                  />
+                  {formProps.errors.name && formProps.touched.name ? (
+                    <div class="errorMessage">{formProps.errors.name}</div>
+                  ) : null}
 
-                <label htmlFor="quantity" style={{ display: 'inline-flex' }}>
-                  Quantity
+
+                  <label htmlFor="ingredients" >
+                    Ingredients
                 </label>
-                <Field
-                  type="text"
-                  component="textarea"
-                  id="quantity"
-                  placeholder="Fill in the quantity"
-                  value={formProps.values.quantity}
-                />
-                {formProps.errors.quantity && formProps.touched.quantity ? (
-                  <div class="errorMessage">{formProps.errors.quantity}</div>
-                ) : null}
-                <button
-                  type="submit"
-                  className="submitButton"
-                  disabled={formProps.isSubmitting}>
-                  Create cocktail
+                  <Field
+                    type="text"
+                    component="textarea"
+                    id="ingredients"
+                    placeholder="Fill in the ingredients"
+                    value={formProps.values.ingredients}
+                  /> {formProps.errors.ingredients && formProps.touched.ingredients ? (
+                    <div class="errorMessage">{formProps.errors.ingredients}</div>
+                  ) : null}
+
+                  <label htmlFor="quantity" >
+                    Quantity
+                </label>
+                  <Field
+                    type="text"
+                    component="textarea"
+                    id="quantity"
+                    placeholder="Fill in the quantity"
+                    value={formProps.values.quantity}
+                  />
+                  {formProps.errors.quantity && formProps.touched.quantity ? (
+                    <div class="errorMessage">{formProps.errors.quantity}</div>
+                  ) : null}
+
+                  <button
+                    type="submit"
+                    className="button"
+                    disabled={formProps.isSubmitting}>
+                    Create cocktail
                </button>
+
+                </div>
               </div>
             </Form >
           );

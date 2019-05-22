@@ -5,16 +5,45 @@
   justify-content: flex-start;
   align-content: flex-start;
   align-items: stretch;
-  background-color: white;
-
+  background-color: lightyellow !important;
+  margin-top: 10px;
 }
 .box {
-background-color: lightyellow;
 width: 200px;
-height: 180px;
-margin: 10px;
+height: 200px !important;
+margin: 0px;
 float: left;
+text-align: center;
+padding-top: 0px !important;
 }
 .box img{
-padding-top:10px;
+display: block;
+margin: 0 auto;
+border: 5px solid lightpink;
+padding-top: 10px !important;
+}
+.box p{
+display: block;
+margin: 0 auto;
+}
+
+.boxAdd{
+margin-left: 10px;
+float: left;
+}
+.button{
+background-color: lightpink;
+border: solid 1px indianred;  
+color: black;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+
+.button:hover{
+background-color: indianred;
 }

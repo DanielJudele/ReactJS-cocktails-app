@@ -55,7 +55,7 @@ class Champagneflute extends Component {
       return (
         <div>
           <div className="boxAdd">
-            <button onClick={e => this.handleAddClick(e)}>Add</button>
+            <button className="button" onClick={e => this.handleAddClick(e)}>Add</button>
           </div>
           <div className="container">
             {items.map(item => (
