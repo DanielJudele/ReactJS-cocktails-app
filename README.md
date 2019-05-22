@@ -1,3 +1,5 @@
+![Screenshot](https://github.com/DanielJudele/ReactJS-cocktails-app/blob/master/App.PNG)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
