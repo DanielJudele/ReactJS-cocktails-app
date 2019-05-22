@@ -1,4 +1,11 @@
+## Here are few screenshots from the application: 
+Application overview:
+
 ![Screenshot](https://github.com/DanielJudele/ReactJS-cocktails-app/blob/master/App.PNG)
+
+Add new cocktail:
+
+![Screenshot](https://github.com/DanielJudele/ReactJS-cocktails-app/blob/master/AddCocktail.PNG)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
